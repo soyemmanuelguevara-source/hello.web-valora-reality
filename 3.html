@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Valora Realty — Bienes raíces premium en el área metropolitana de Monterrey. Compra, venta, renta y asesoría patrimonial con acompañamiento profesional. Tu Patrimonio en Buenas Manos.">
+<meta name="keywords" content="bienes raíces Monterrey, inmobiliaria Monterrey, compra de casas Monterrey, venta de propiedades Monterrey, renta de departamentos Monterrey, asesoría patrimonial, inversión inmobiliaria Nuevo León, Valora Realty">
+<meta property="og:title" content="Valora Realty | Bienes Raíces Premium en Monterrey">
+<meta property="og:description" content="Tu Patrimonio en Buenas Manos. Compra, venta, renta y asesoría patrimonial con acompañamiento profesional en el área metropolitana de Monterrey.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80">
+<title>Valora Realty | Bienes Raíces Premium en Monterrey — Compra, Venta y Renta</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230B1F3A' stroke='%23C9A227' stroke-width='4'/%3E%3Ctext x='50' y='64' text-anchor='middle' font-family='Arial, sans-serif' font-size='40' font-weight='700' fill='%23C9A227'%3EVR%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* =============================================
+   VARIABLES — Paleta Valora Realty (dorado premium)
+============================================= */
+:root {
+  --gold:        #C9A227;
+  --gold-light:  #E4C874;
+  --gold-dark:   #8A6C1F;
+  --gold-subtle: rgba(201,162,39,0.12);
+  --black:       #0B1F3A;
+  --dark:        #0B1F3A;
+  --dark-2:      #132A4C;
+  --dark-3:      #1B3A63;
+  --white:       #FFFFFF;
+  --cream:       #FFFFFF;
+  --cream-2:     #F5F6F8;
+  --text-dark:   #161616;
+  --text-mid:    #5C6470;
+  --text-soft:   #8A93A0;
+  --text-muted:  rgba(255,255,255,0.55);
+  --text-dim:    rgba(255,255,255,0.32);
+  --border-d:    rgba(201,162,39,0.16);
+  --font-heading: 'Sora', sans-serif;
+  --font-sans:   'Inter', system-ui, sans-serif;
+  --ease-out:    cubic-bezier(0.22,1,0.36,1);
+  --ease-inout:  cubic-bezier(0.65,0,0.35,1);
+}
+
+/* =============================================
+   RESET
+============================================= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--dark);
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+ul { list-style: none; }
+
+/* =============================================
+   LOADER
+============================================= */
+#loader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--cream);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 0;
+  transition: opacity 0.9s var(--ease-out), visibility 0.9s;
+}
+#loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.loader-logo-wrap {
+  animation: ldLogoIn 0.9s var(--ease-out) both;
+  text-align: center;
+}
+.loader-logo-wrap svg {
+  width: 128px; height: 128px;
+  animation: ldPulse 2.8s ease-in-out infinite;
+}
+@keyframes ldLogoIn { from { opacity:0; transform:scale(0.88) translateY(12px); } to { opacity:1; transform:scale(1) translateY(0); } }
+@keyframes ldPulse   { 0%,100% { transform:scale(1); } 50% { transform:scale(1.04); } }
+
+.loader-tag {
+  font-size: 9px; letter-spacing: 5px;
+  color: var(--gold); text-transform: uppercase;
+  margin-top: 2px; font-weight: 500;
+  animation: ldFadeUp 0.8s var(--ease-out) 0.5s both;
+}
+.loader-progress {
+  width: 110px; height: 1px;
+  background: rgba(0,0,0,0.1);
+  margin-top: 26px; overflow: hidden;
+  animation: ldFadeUp 0.5s var(--ease-out) 0.3s both;
+}
+.loader-progress-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold-light), var(--gold-dark));
+  animation: ldFill 1.4s var(--ease-inout) 0.4s forwards;
+}
+@keyframes ldFill   { to { width: 100%; } }
+@keyframes ldFadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+/* =============================================
+   MOBILE MENU
+============================================= */
+#mobile-menu {
+  position: fixed; inset: 0; z-index: 999;
+  background: rgba(5,5,5,0.98);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 36px;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.4s var(--ease-out), visibility 0.4s;
+}
+#mobile-menu.open { opacity: 1; visibility: visible; }
+
+.mob-logo {
+  display: flex; justify-content: center; margin-bottom: 10px;
+}
+.mob-logo-pill {
+  display: flex; align-items: center;
+}
+.mob-logo-pill svg {
+  height: 84px; width: 84px; display: block;
+  filter: drop-shadow(0 0 14px rgba(201,162,39,0.55));
+}
+
+#mobile-menu a {
+  font-family: var(--font-heading);
+  font-size: 32px; font-weight: 600;
+  color: var(--white); letter-spacing: 3px;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+#mobile-menu a:hover { color: var(--gold); }
+
+/* =============================================
+   NAVIGATION
+============================================= */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 18px 5%;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background 0.5s var(--ease-out), padding 0.4s var(--ease-out),
+              backdrop-filter 0.5s, box-shadow 0.4s;
+}
+#nav.scrolled {
+  padding: 12px 5%;
+  background: rgba(8,8,8,0.86);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  box-shadow: 0 1px 0 var(--border-d);
+}
+
+.nav-logo { display: flex; align-items: center; gap: 10px; }
+.nav-logo-pill {
+  display: flex; align-items: center;
+  flex-shrink: 0;
+}
+.nav-logo-pill svg {
+  height: 48px; width: 48px; display: block;
+  filter: drop-shadow(0 0 10px rgba(201,162,39,0.5));
+  transition: filter 0.3s;
+}
+.nav-logo-text { line-height: 1.1; }
+.nav-logo-text strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 15px; font-weight: 600;
+  color: var(--white); letter-spacing: 2.5px;
+  text-transform: uppercase;
+}
+.nav-logo-text small {
+  font-size: 8px; letter-spacing: 4px;
+  color: var(--gold); text-transform: uppercase;
+}
+
+.nav-links { display: flex; align-items: center; gap: 34px; }
+.nav-links a {
+  font-size: 10px; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--text-muted);
+  transition: color 0.3s; font-weight: 400;
+}
+.nav-links a:hover { color: var(--white); }
+
+.nav-cta {
+  padding: 9px 22px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-size: 9.5px; letter-spacing: 2.5px;
+  text-transform: uppercase; font-weight: 500;
+  transition: background 0.3s, color 0.3s;
+  font-family: var(--font-sans);
+}
+.nav-cta:hover { background: var(--gold); color: var(--black); }
+
+.nav-ham {
+  display: none; flex-direction: column; gap: 5px; padding: 4px;
+}
+.nav-ham span { display: block; width: 24px; height: 1.5px; background: var(--white); transition: transform 0.3s, opacity 0.3s; }
+.nav-ham.open span:nth-child(1) { transform: rotate(45deg) translate(4px,4px); }
+.nav-ham.open span:nth-child(2) { opacity: 0; }
+.nav-ham.open span:nth-child(3) { transform: rotate(-45deg) translate(4px,-4px); }
+
+/* =============================================
+   HERO — imagen real + Ken Burns + typewriter + shimmer
+============================================= */
+#hero {
+  position: relative; height: 100svh; min-height: 620px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80') center 40% / cover no-repeat;
+  background-attachment: fixed;
+}
+
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(170deg, rgba(4,4,4,0.88) 0%, rgba(6,6,6,0.62) 45%, rgba(4,4,4,0.82) 100%),
+    radial-gradient(ellipse 70% 60% at 50% 40%, rgba(201,162,39,0.08) 0%, transparent 70%);
+}
+
+#particle-canvas {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+}
+
+.hero-content {
+  position: relative; z-index: 4;
+  text-align: center; max-width: 900px; padding: 0 24px;
+}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 14px;
+  font-size: 9.5px; letter-spacing: 5px; text-transform: uppercase;
+  color: var(--gold); font-weight: 500; margin-bottom: 28px;
+  opacity: 0; transform: translateY(20px);
+  animation: fadeUp 0.9s var(--ease-out) 0.2s forwards;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: ''; display: block; width: 38px; height: 1px; background: var(--gold); opacity: 0.5;
+}
+
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(52px, 10vw, 112px);
+  font-weight: 700; line-height: 0.95;
+  letter-spacing: -1px; color: var(--white);
+  margin-bottom: 14px;
+  opacity: 0; transform: translateY(36px);
+  animation: fadeUp 1s var(--ease-out) 0.45s forwards;
+}
+/* Shimmer dorado constante */
+.hero-title em {
+  font-style: normal; font-weight: 800;
+  background: linear-gradient(90deg,
+    var(--gold-dark) 0%, var(--gold-light) 28%,
+    #FFF0C2 50%, var(--gold-light) 72%, var(--gold-dark) 100%);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: goldShimmer 4.5s ease-in-out infinite 2.5s;
+}
+@keyframes goldShimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+.hero-subtitle {
+  font-family: var(--font-heading);
+  font-size: clamp(18px, 2.8vw, 28px);
+  font-weight: 400; font-style: normal;
+  color: rgba(255,255,255,0.55); letter-spacing: 2px;
+  margin-bottom: 36px;
+  opacity: 0; transform: translateY(24px);
+  animation: fadeUp 1s var(--ease-out) 0.7s forwards;
+}
+/* Typewriter */
+.typer-word {
+  color: var(--gold-light);
+  font-weight: 600;
+  font-style: normal;
+  border-right: none;
+}
+.typer-cursor {
+  display: inline-block; width: 2px; height: 0.85em;
+  background: var(--gold); vertical-align: middle;
+  margin-left: 2px;
+  animation: cursorBlink 0.75s ease-in-out infinite;
+}
+@keyframes cursorBlink { 0%,100% { opacity:1; } 50% { opacity:0; } }
+
+.hero-desc {
+  font-size: 15px; color: var(--text-muted);
+  max-width: 520px; margin: 0 auto 50px;
+  line-height: 1.85; font-weight: 300;
+  opacity: 0; transform: translateY(20px);
+  animation: fadeUp 1s var(--ease-out) 0.9s forwards;
+}
+
+.hero-actions {
+  display: flex; align-items: center; justify-content: center;
+  gap: 18px; flex-wrap: wrap;
+  opacity: 0; transform: translateY(20px);
+  animation: fadeUp 1s var(--ease-out) 1.1s forwards;
+}
+
+.btn-primary {
+  padding: 16px 44px; background: var(--gold);
+  color: var(--black); font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; font-weight: 600;
+  font-family: var(--font-sans);
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  display: inline-block;
+}
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(201,162,39,0.35); }
+
+.btn-ghost {
+  padding: 15px 44px;
+  border: 1px solid rgba(255,255,255,0.22);
+  color: var(--white); font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; font-weight: 400;
+  font-family: var(--font-sans);
+  transition: border-color 0.3s, color 0.3s, transform 0.3s;
+  display: inline-block;
+}
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+.hero-scroll {
+  position: absolute; bottom: 30px; left: 50%;
+  transform: translateX(-50%); z-index: 4;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  opacity: 0; animation: fadeUp 1s var(--ease-out) 1.6s forwards;
+}
+.hero-scroll span { font-size: 8px; letter-spacing: 4px; text-transform: uppercase; color: var(--text-dim); }
+.scroll-line {
+  width: 1px; height: 46px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 2.2s ease-in-out infinite;
+}
+@keyframes fadeUp    { to { opacity:1; transform:translateY(0); } }
+@keyframes scrollPulse { 0%,100%{opacity:0.25;} 50%{opacity:1;} }
+
+/* Hero rotating geometric rings */
+.hero-ring {
+  position: absolute; top: 50%; left: 50%;
+  border: 1px solid rgba(201,162,39,0.08);
+  pointer-events: none; z-index: 2;
+}
+.ring-1 { width: 700px; height: 700px; margin: -350px 0 0 -350px; animation: ringRot 34s linear infinite; }
+.ring-2 { width: 500px; height: 500px; margin: -250px 0 0 -250px; border-color: rgba(201,162,39,0.06); animation: ringRot 24s linear infinite reverse; }
+.ring-3 { width: 300px; height: 300px; margin: -150px 0 0 -150px; border-color: rgba(201,162,39,0.045); animation: ringRot 17s linear infinite; }
+@keyframes ringRot { to { transform: rotate(360deg); } }
+
+/* Hero cinematic light sweep on load */
+.hero-flash {
+  position: absolute; top: 0; height: 100%; width: 55%;
+  background: linear-gradient(90deg, transparent, rgba(255,220,100,0.07), transparent);
+  z-index: 3; pointer-events: none;
+  animation: heroFlash 2.2s ease-out 0.9s forwards;
+  left: -55%;
+}
+@keyframes heroFlash { 0%{left:-55%;opacity:1;} 100%{left:115%;opacity:0;} }
+
+/* Hero ambient glow pulse on title area */
+.hero-glow-pulse {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; height: 300px;
+  background: radial-gradient(ellipse, rgba(201,162,39,0.09) 0%, transparent 70%);
+  pointer-events: none; z-index: 2;
+  animation: glowPulse 5s ease-in-out infinite 1.5s;
+}
+@keyframes glowPulse { 0%,100%{opacity:0.4;transform:translate(-50%,-50%) scale(1);} 50%{opacity:1;transform:translate(-50%,-50%) scale(1.15);} }
+
+/* =============================================
+   LAYOUT HELPERS
+============================================= */
+.container { max-width: 1280px; margin: 0 auto; padding: 0 5%; }
+
+.section-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 9.5px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--gold); font-weight: 500; margin-bottom: 18px;
+}
+.section-tag::before, .section-tag::after {
+  content: ''; display: block; width: 26px; height: 1px; background: var(--gold); opacity: 0.45;
+}
+.section-tag.no-lines::before, .section-tag.no-lines::after { display: none; }
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(34px,5vw,62px);
+  font-weight: 700; line-height: 1.08; letter-spacing: -0.5px;
+}
+.section-title em { font-style: normal; font-weight: 800; color: var(--gold); }
+.section-lead {
+  margin-top: 18px; font-size: 15px; max-width: 540px;
+  margin-left: auto; margin-right: auto;
+  line-height: 1.85; font-weight: 300;
+}
+.section-header { text-align: center; margin-bottom: 68px; }
+
+/* =============================================
+   ABOUT  — CREAM section
+============================================= */
+#nosotros {
+  padding: 120px 0;
+  background: var(--cream);
+}
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+
+/* Visual */
+.about-visual { position: relative; }
+.about-img {
+  width: 100%; aspect-ratio: 3/4;
+  object-fit: cover; object-position: center top;
+  display: block;
+}
+.about-badge {
+  position: absolute; top: 24px; right: -20px;
+  width: 92px; height: 92px; background: var(--gold);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 2px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+.about-badge strong { font-family: var(--font-heading); font-size: 24px; font-weight: 600; color: var(--black); line-height: 1; }
+.about-badge span   { font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(0,0,0,0.6); font-weight: 600; text-align: center; line-height: 1.4; }
+
+/* Content */
+.about-content { padding: 0 8px; }
+.about-title {
+  font-family: var(--font-heading);
+  font-size: clamp(28px,3.8vw,48px);
+  font-weight: 700; line-height: 1.15;
+  color: var(--text-dark); margin-bottom: 22px;
+}
+.about-title em { font-style: normal; font-weight: 800; color: var(--gold); }
+.about-text { font-size: 15px; color: var(--text-mid); line-height: 1.9; margin-bottom: 18px; font-weight: 300; }
+
+.about-stats {
+  display: flex; gap: 36px; flex-wrap: wrap;
+  margin-top: 40px; padding-top: 36px;
+  border-top: 1px solid rgba(201,162,39,0.25);
+}
+.about-stat strong { display: block; font-family: var(--font-heading); font-size: 38px; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 5px; }
+.about-stat span   { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-soft); font-weight: 400; }
+
+/* =============================================
+   EXPERIENCIAS (rooms)  — DARK section con fotos reales
+============================================= */
+#propiedades { padding: 120px 0; background: var(--dark-2); }
+
+.rooms-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; }
+.room-card { position: relative; overflow: hidden; cursor: pointer; }
+.room-card-inner { aspect-ratio: 3/4; position: relative; overflow: hidden; }
+
+.room-card-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  transition: transform 0.9s var(--ease-out);
+}
+.room-card:hover .room-card-img { transform: scale(1.07); }
+
+.room-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 55%, transparent 100%);
+  z-index: 1;
+}
+.room-content {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 30px 24px; z-index: 2;
+  transform: translateY(6px);
+  transition: transform 0.5s var(--ease-out);
+}
+.room-card:hover .room-content { transform: translateY(0); }
+
+.room-tag { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 8px; }
+.room-name { font-family: var(--font-heading); font-size: 24px; font-weight: 600; color: var(--white); line-height: 1.2; margin-bottom: 10px; }
+.room-desc {
+  font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 14px;
+  max-height: 0; overflow: hidden; opacity: 0;
+  transition: max-height 0.5s var(--ease-out), opacity 0.45s;
+}
+.room-card:hover .room-desc { max-height: 92px; opacity: 1; }
+.room-price { font-family: var(--font-heading); font-size: 20px; font-weight: 600; color: var(--gold); }
+.room-price span { font-size: 11px; color: var(--text-dim); font-family: var(--font-sans); letter-spacing: 1px; }
+
+.room-pills {
+  position: absolute; top: 18px; right: 18px; z-index: 2;
+  display: flex; flex-direction: column; gap: 5px;
+  opacity: 0; transform: translateX(8px);
+  transition: opacity 0.4s, transform 0.4s var(--ease-out);
+}
+.room-card:hover .room-pills { opacity: 1; transform: translateX(0); }
+.room-pill {
+  background: rgba(6,6,6,0.82); backdrop-filter: blur(8px);
+  border: 1px solid var(--border-d);
+  padding: 4px 9px; font-size: 9px; color: var(--gold);
+  letter-spacing: 1.5px; text-transform: uppercase;
+}
+
+/* =============================================
+   AMENITIES (Ventajas)  — WHITE section
+============================================= */
+#servicios { padding: 120px 0; background: var(--white); }
+#servicios .section-title { color: var(--text-dark); }
+#servicios .section-lead  { color: var(--text-mid); }
+
+.amenities-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; margin-top: 68px; }
+.amenity-card {
+  background: var(--cream); padding: 44px 28px;
+  border: 1px solid rgba(201,162,39,0.12);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  transition: border-color 0.4s, box-shadow 0.4s, transform 0.4s var(--ease-out);
+  position: relative; overflow: hidden;
+}
+.amenity-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: var(--gold);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s var(--ease-out);
+}
+.amenity-card:hover {
+  border-color: rgba(201,162,39,0.35);
+  box-shadow: 0 8px 36px rgba(0,0,0,0.09);
+  transform: translateY(-5px);
+}
+.amenity-card:hover::after { transform: scaleX(1); }
+
+.amenity-icon { width: 46px; height: 46px; margin-bottom: 20px; color: var(--gold); }
+.amenity-icon svg { width: 100%; height: 100%; }
+.amenity-name { font-family: var(--font-heading); font-size: 18px; font-weight: 400; color: var(--text-dark); margin-bottom: 10px; }
+.amenity-desc { font-size: 13px; color: var(--text-mid); line-height: 1.75; font-weight: 300; }
+
+/* =============================================
+   EXPERIENCE BAND  — GOLD
+============================================= */
+#experience { padding: 96px 0; background: var(--gold); position: relative; overflow: hidden; }
+#experience::before {
+  content: 'VALORA REALTY';
+  position: absolute; font-family: var(--font-heading);
+  font-size: clamp(80px,14vw,190px); font-weight: 600;
+  color: rgba(0,0,0,0.055); white-space: nowrap;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  letter-spacing: 8px; pointer-events: none;
+}
+.exp-inner { display: flex; align-items: center; justify-content: space-between; gap: 60px; flex-wrap: wrap; }
+.exp-left { flex: 1; min-width: 280px; }
+.exp-left .section-tag { color: rgba(0,0,0,0.45); }
+.exp-left .section-tag::before, .exp-left .section-tag::after { background: rgba(0,0,0,0.25); }
+.exp-tagline { font-family: var(--font-heading); font-size: clamp(28px,3.6vw,48px); font-weight: 600; color: var(--black); line-height: 1.2; margin-top: 8px; }
+.exp-tagline em { font-style: normal; font-weight: 800; }
+.exp-stats { display: flex; gap: 52px; flex-wrap: wrap; }
+.exp-stat { text-align: center; }
+.exp-stat strong { display: block; font-family: var(--font-heading); font-size: 42px; font-weight: 700; color: var(--black); line-height: 1; margin-bottom: 6px; }
+.exp-stat span { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(0,0,0,0.5); font-weight: 600; }
+
+/* =============================================
+   GALLERY  — DARK, imágenes reales
+============================================= */
+#galeria { padding: 120px 0; background: var(--dark); }
+#galeria .section-title { color: var(--white); }
+#galeria .section-lead  { color: var(--text-muted); }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 330px 260px;
+  gap: 4px;
+  margin-top: 68px;
+}
+.gallery-item { overflow: hidden; position: relative; cursor: pointer; }
+.gallery-item img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform 0.85s var(--ease-out), filter 0.5s;
+}
+.gallery-item:hover img { transform: scale(1.06); filter: brightness(0.7); }
+.gi-label {
+  position: absolute; bottom: 0; left: 0; right: 0; padding: 18px 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+  font-family: var(--font-heading); font-size: 15px; color: var(--white);
+  opacity: 0; transform: translateY(6px);
+  transition: opacity 0.4s, transform 0.4s var(--ease-out);
+  z-index: 2;
+}
+.gallery-item:hover .gi-label { opacity: 1; transform: translateY(0); }
+
+.gi-1 { grid-column: 1/7;  }
+.gi-2 { grid-column: 7/10; }
+.gi-3 { grid-column: 10/13;}
+.gi-4 { grid-column: 1/5;  }
+.gi-5 { grid-column: 5/9;  }
+.gi-6 { grid-column: 9/13; }
+
+/* =============================================
+   LOCATION  — CREAM section (no usado actualmente)
+============================================= */
+#location { padding: 120px 0; background: var(--cream-2); }
+.location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+
+.map-box {
+  width: 100%; aspect-ratio: 4/3;
+  background: #EDE8DF; border: 1px solid rgba(201,162,39,0.2);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.map-box::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(201,162,39,0.06) 40px, rgba(201,162,39,0.06) 41px),
+    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(201,162,39,0.06) 40px, rgba(201,162,39,0.06) 41px);
+}
+.map-pin-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; z-index: 1; }
+.map-pin-wrap svg { width: 44px; height: 44px; color: var(--gold); filter: drop-shadow(0 0 16px rgba(201,162,39,0.4)); animation: pinFloat 2.5s ease-in-out infinite; }
+.map-pin-wrap span { font-family: var(--font-heading); font-size: 15px; color: var(--text-dark); letter-spacing: 2px; }
+@keyframes pinFloat { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-7px);} }
+
+.location-info .section-tag { color: var(--gold); }
+.location-title { font-family: var(--font-heading); font-size: clamp(24px,3.2vw,42px); font-weight: 700; color: var(--text-dark); margin-bottom: 20px; line-height: 1.15; }
+.location-title em { font-style: normal; font-weight: 800; color: var(--gold); }
+.location-text { font-size: 15px; color: var(--text-mid); line-height: 1.85; margin-bottom: 34px; font-weight: 300; }
+.location-details { display: flex; flex-direction: column; }
+.loc-detail { display: flex; align-items: flex-start; gap: 14px; padding: 18px 0; border-bottom: 1px solid rgba(0,0,0,0.08); }
+.loc-detail:last-child { border-bottom: none; }
+.loc-detail svg { width: 18px; height: 18px; color: var(--gold); flex-shrink: 0; margin-top: 2px; }
+.loc-label { display: block; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-dark); font-weight: 600; margin-bottom: 4px; }
+.loc-val { font-size: 14px; color: var(--text-mid); line-height: 1.7; }
+
+/* =============================================
+   TESTIMONIOS  — CREAM
+============================================= */
+#testimonios { padding: 120px 0; background: var(--cream-2); }
+#testimonios .section-title { color: var(--text-dark); }
+#testimonios .section-lead  { color: var(--text-mid); }
+
+.reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; }
+.review-card {
+  background: var(--white);
+  padding: 40px 32px;
+  border: 1px solid rgba(201,162,39,0.14);
+  position: relative; overflow: hidden;
+  transition: box-shadow 0.4s, transform 0.4s var(--ease-out);
+}
+.review-card::before {
+  content: '\201C';
+  position: absolute; top: 10px; right: 22px;
+  font-family: var(--font-heading); font-size: 90px; font-weight: 600;
+  color: rgba(201,162,39,0.12); line-height: 1; pointer-events: none;
+}
+.review-card:hover { box-shadow: 0 14px 52px rgba(0,0,0,0.1); transform: translateY(-5px); }
+.review-stars { color: var(--gold); font-size: 15px; letter-spacing: 2px; margin-bottom: 18px; }
+.review-text {
+  font-family: var(--font-heading); font-size: 16px; font-weight: 400; font-style: normal;
+  color: #444; line-height: 1.88; margin-bottom: 26px;
+}
+.review-author {
+  display: flex; align-items: center; gap: 12px;
+  padding-top: 20px; border-top: 1px solid rgba(201,162,39,0.18);
+}
+.review-avatar {
+  width: 38px; height: 38px; background: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-heading); font-size: 16px; font-weight: 600;
+  color: var(--black); flex-shrink: 0;
+}
+.review-name strong { display: block; font-size: 13px; font-weight: 500; color: var(--text-dark); margin-bottom: 2px; }
+.review-name span   { font-size: 11px; color: var(--text-soft); letter-spacing: 0.5px; }
+.btn-ghost-dark {
+  display: inline-block; padding: 14px 40px;
+  border: 1px solid rgba(0,0,0,0.18);
+  color: var(--text-dark); font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; font-weight: 400;
+  font-family: var(--font-sans);
+  transition: border-color 0.3s, color 0.3s;
+}
+.btn-ghost-dark:hover { border-color: var(--gold); color: var(--gold-dark); }
+
+/* =============================================
+   CONTACT (Cotizaciones) — DARK
+============================================= */
+#contacto { padding: 120px 0; background: var(--dark-2); position: relative; overflow: hidden; }
+#contacto::before {
+  content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(201,162,39,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.contact-left .section-tag { justify-content: flex-start; }
+.contact-left .section-tag::before { display: none; }
+.contact-title { font-family: var(--font-heading); font-size: clamp(24px,3.2vw,42px); font-weight: 700; color: var(--white); margin-bottom: 12px; line-height: 1.2; }
+.contact-title em { font-style: normal; font-weight: 800; color: var(--gold); }
+.contact-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 38px; line-height: 1.8; font-weight: 300; }
+
+#booking-form { display: flex; flex-direction: column; gap: 16px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-group { display: flex; flex-direction: column; gap: 7px; }
+.form-group label { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: transparent; border: 1px solid var(--border-d);
+  padding: 13px 16px; color: var(--white);
+  font-family: var(--font-sans); font-size: 14px; font-weight: 300;
+  outline: none; -webkit-appearance: none; appearance: none; border-radius: 0;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.form-group select { background: var(--dark-3); cursor: pointer; }
+.form-group select option { background: var(--dark-3); color: var(--white); }
+.form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-dim); }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,162,39,0.12); }
+.form-group input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1) opacity(0.35); cursor: pointer; }
+.form-group textarea { resize: vertical; min-height: 90px; }
+
+.form-submit {
+  margin-top: 6px; width: 100%; padding: 17px;
+  background: var(--gold); color: var(--black);
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  font-weight: 600; font-family: var(--font-sans);
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.form-submit:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(201,162,39,0.28); }
+
+.contact-right .section-tag { justify-content: flex-start; }
+.contact-right .section-tag::before { display: none; }
+.channels { display: flex; flex-direction: column; gap: 2px; margin-top: 30px; }
+.channel {
+  display: flex; align-items: center; gap: 16px; padding: 20px 22px;
+  background: var(--dark-3); border: 1px solid transparent;
+  transition: border-color 0.3s, background 0.3s; cursor: pointer;
+}
+.channel:hover { border-color: var(--border-d); background: rgba(201,162,39,0.05); }
+.ch-icon { width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; background: var(--gold-subtle); border: 1px solid var(--border-d); flex-shrink: 0; color: var(--gold); }
+.ch-icon svg { width: 18px; height: 18px; }
+.ch-info strong { display: block; font-size: 13px; font-weight: 500; color: var(--white); margin-bottom: 3px; }
+.ch-info span { font-size: 12px; color: var(--text-muted); }
+.ch-arrow { margin-left: auto; color: var(--text-dim); transition: color 0.3s, transform 0.3s; flex-shrink: 0; }
+.channel:hover .ch-arrow { color: var(--gold); transform: translateX(4px); }
+
+.contact-quote { margin-top: 28px; padding: 24px; border: 1px solid var(--border-d); background: var(--gold-subtle); }
+.contact-quote p { font-family: var(--font-heading); font-size: 17px; font-weight: 400; font-style: normal; color: rgba(255,255,255,0.85); line-height: 1.75; text-align: center; }
+.contact-quote cite { display: block; margin-top: 10px; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-style: normal; text-align: center; }
+
+/* =============================================
+   FOOTER
+============================================= */
+footer { background: var(--black); padding: 68px 5% 36px; border-top: 1px solid var(--border-d); }
+.footer-top { display: flex; justify-content: space-between; gap: 56px; flex-wrap: wrap; padding-bottom: 52px; border-bottom: 1px solid var(--border-d); margin-bottom: 32px; }
+.footer-brand { max-width: 270px; }
+.footer-logo-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.footer-logo-pill { display: flex; align-items: center; }
+.footer-logo-pill svg { height: 46px; width: 46px; filter: drop-shadow(0 0 10px rgba(201,162,39,0.5)); }
+.footer-logo-text strong { display: block; font-family: var(--font-heading); font-size: 14px; font-weight: 600; color: var(--white); letter-spacing: 2px; text-transform: uppercase; }
+.footer-logo-text small { font-size: 8px; letter-spacing: 3.5px; color: var(--gold); text-transform: uppercase; }
+.footer-brand p { font-size: 13px; color: var(--text-dim); line-height: 1.8; font-weight: 300; }
+.footer-col h4 { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; font-weight: 500; }
+.footer-col ul { display: flex; flex-direction: column; gap: 9px; }
+.footer-col ul a { font-size: 13px; color: var(--text-dim); transition: color 0.3s; font-weight: 300; }
+.footer-col ul a:hover { color: var(--white); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-bottom p { font-size: 11px; color: var(--text-dim); }
+.social-links { display: flex; gap: 10px; }
+.social-link { width: 32px; height: 32px; border: 1px solid var(--border-d); display: flex; align-items: center; justify-content: center; color: var(--text-dim); transition: border-color 0.3s, color 0.3s; }
+.social-link:hover { border-color: var(--gold); color: var(--gold); }
+.social-link svg { width: 13px; height: 13px; }
+
+/* =============================================
+   WHATSAPP FLOAT
+============================================= */
+#wa-float {
+  position: fixed; bottom: 26px; right: 22px; z-index: 900;
+  width: 58px; height: 58px; background: #25D366; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 22px rgba(37,211,102,0.4);
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
+}
+#wa-float:hover { transform: scale(1.1) translateY(-3px); box-shadow: 0 8px 32px rgba(37,211,102,0.55); }
+#wa-float svg { width: 28px; height: 28px; fill: white; position: relative; z-index: 1; }
+.wa-ring { position: absolute; inset: -5px; border-radius: 50%; background: rgba(37,211,102,0.22); animation: waRing 2.5s ease-in-out infinite; }
+.wa-ring-2 { position: absolute; inset: -12px; border-radius: 50%; background: rgba(37,211,102,0.1); animation: waRing 2.5s ease-in-out 0.65s infinite; }
+@keyframes waRing { 0%,100%{transform:scale(1);opacity:0.7;} 50%{transform:scale(1.18);opacity:0;} }
+
+/* =============================================
+   SCROLL REVEAL
+============================================= */
+.reveal { opacity:0; transform:translateY(28px); transition:opacity 0.85s var(--ease-out), transform 0.85s var(--ease-out); }
+.reveal.visible { opacity:1; transform:translateY(0); }
+.d1 { transition-delay:0.1s; }
+.d2 { transition-delay:0.2s; }
+.d3 { transition-delay:0.3s; }
+.d4 { transition-delay:0.4s; }
+
+/* =============================================
+   RESPONSIVE
+============================================= */
+@media (max-width: 1024px) {
+  .rooms-grid { grid-template-columns: 1fr 1fr; }
+  .amenities-grid { grid-template-columns: repeat(2,1fr); }
+  .reviews-grid { grid-template-columns: 1fr; gap: 3px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 52px; }
+  .gallery-grid {
+    grid-template-columns: repeat(6,1fr);
+    grid-template-rows: 280px 220px;
+  }
+  .gi-1{grid-column:1/7;} .gi-2{grid-column:1/4;} .gi-3{grid-column:4/7;}
+  .gi-4{grid-column:1/3;} .gi-5{grid-column:3/5;} .gi-6{grid-column:5/7;}
+}
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .nav-ham { display: flex; }
+  .about-grid, .location-grid { grid-template-columns: 1fr; gap: 48px; }
+  .about-badge { top: 14px; right: 14px; }
+  .rooms-grid { grid-template-columns: 1fr; }
+  .amenities-grid { grid-template-columns: 1fr 1fr; }
+  .exp-inner { flex-direction: column; gap: 36px; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-top { flex-direction: column; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .gi-1,.gi-2,.gi-3,.gi-4,.gi-5,.gi-6 { grid-column: auto; grid-row: auto; }
+  .gallery-grid .gallery-item img { aspect-ratio: 1; height: 220px; }
+}
+@media (max-width: 480px) {
+  .amenities-grid { grid-template-columns: 1fr; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .btn-primary, .btn-ghost { text-align: center; padding: 15px; }
+  .about-stats { gap: 18px; }
+  .exp-stats { gap: 36px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ LOADER ============ -->
+<div id="loader" role="status" aria-label="Cargando Valora Realty">
+  <div class="loader-logo-wrap">
+    <svg viewBox="0 0 100 100" role="img" aria-label="Valora Realty">
+      <circle cx="50" cy="50" r="47" fill="#0B1F3A" stroke="#C9A227" stroke-width="2.5"/>
+      <text x="50" y="63" text-anchor="middle" font-family="'Sora', sans-serif" font-size="34" font-weight="700" fill="#C9A227" letter-spacing="1">VR</text>
+    </svg>
+  </div>
+  <p class="loader-tag">Todo en Bienes Raíces</p>
+  <div class="loader-progress"><div class="loader-progress-fill"></div></div>
+</div>
+
+<!-- ============ MOBILE MENU ============ -->
+<div id="mobile-menu" role="dialog" aria-label="Menú principal">
+  <div class="mob-logo">
+    <div class="mob-logo-pill">
+      <svg viewBox="0 0 100 100" role="img" aria-label="Valora Realty">
+        <circle cx="50" cy="50" r="47" fill="#0B1F3A" stroke="#C9A227" stroke-width="2.5"/>
+        <text x="50" y="63" text-anchor="middle" font-family="'Sora', sans-serif" font-size="34" font-weight="700" fill="#C9A227" letter-spacing="1">VR</text>
+      </svg>
+    </div>
+  </div>
+  <a href="#hero"       onclick="closeMob()">Inicio</a>
+  <a href="#nosotros"   onclick="closeMob()">Nosotros</a>
+  <a href="#servicios"  onclick="closeMob()">Servicios</a>
+  <a href="#propiedades" onclick="closeMob()">Propiedades</a>
+  <a href="#contacto"   onclick="closeMob()">Contacto</a>
+</div>
+
+<!-- ============ NAV ============ -->
+<nav id="nav" role="navigation" aria-label="Navegación principal">
+  <a href="#hero" class="nav-logo" aria-label="Valora Realty - Inicio">
+    <div class="nav-logo-pill">
+      <svg viewBox="0 0 100 100" role="img" aria-label="Logo Valora Realty" class="nav-logo-img">
+        <circle cx="50" cy="50" r="47" fill="#0B1F3A" stroke="#C9A227" stroke-width="2.5"/>
+        <text x="50" y="63" text-anchor="middle" font-family="'Sora', sans-serif" font-size="34" font-weight="700" fill="#C9A227" letter-spacing="1">VR</text>
+      </svg>
+    </div>
+    <div class="nav-logo-text">
+      <strong>Valora Realty</strong>
+      <small>Bienes Raíces</small>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#hero">Inicio</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#propiedades">Propiedades</a></li>
+    <li><a href="#testimonios">Testimonios</a></li>
+  </ul>
+  <a href="https://wa.me/528189941554" target="_blank" rel="noopener" class="nav-cta">Contáctanos</a>
+  <button class="nav-ham" id="ham" aria-label="Abrir menú" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section id="hero" aria-label="Bienvenida a Valora Realty">
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+  <div class="hero-ring ring-1" aria-hidden="true"></div>
+  <div class="hero-ring ring-2" aria-hidden="true"></div>
+  <div class="hero-ring ring-3" aria-hidden="true"></div>
+  <div class="hero-flash" aria-hidden="true"></div>
+  <div class="hero-glow-pulse" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Bienes Raíces Premium · Monterrey, Nuevo León</p>
+    <h1 class="hero-title">Tu Patrimonio en<br><em>Buenas Manos</em></h1>
+    <p class="hero-subtitle">
+      Todo en bienes raíces:&nbsp;<span id="typer" class="typer-word"></span><span class="typer-cursor" aria-hidden="true"></span>
+    </p>
+    <p class="hero-desc">En Valora Realty acompañamos cada paso de tu operación inmobiliaria en el área metropolitana de Monterrey, con asesoría experta, transparencia total y un trato que protege lo que más te ha costado construir.</p>
+    <div class="hero-actions">
+      <a href="https://wa.me/528189941554" target="_blank" rel="noopener" class="btn-primary">Solicitar Asesoría</a>
+      <a href="#propiedades" class="btn-ghost">Ver Propiedades</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ============ SOBRE VALORA REALTY — WHITE ============ -->
+<section id="nosotros">
+  <div class="container" style="padding:120px 0;">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <img
+          src="https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?auto=format&fit=crop&w=900&q=80"
+          alt="Escalera interior moderna con iluminación cálida, reflejo del cuidado en el detalle de Valora Realty"
+          class="about-img"
+          loading="lazy">
+        <div class="about-badge">
+          <strong>VR</strong>
+          <span>Valora Realty</span>
+        </div>
+      </div>
+      <div class="about-content">
+        <p class="section-tag no-lines reveal">Nuestra Esencia</p>
+        <h2 class="about-title reveal d1">Más que bienes raíces,<br><em>un compromiso patrimonial</em></h2>
+        <p class="about-text reveal d2">En Valora Realty acompañamos a familias e inversionistas del área metropolitana de Monterrey en cada etapa de su operación inmobiliaria: compra, venta, renta y asesoría patrimonial, con la seriedad y cercanía que tu patrimonio merece.</p>
+        <p class="about-text reveal d2">Al frente de Valora Realty está <strong>Luis García Sosa</strong>, quien guía a cada cliente hacia la decisión correcta con un enfoque honesto, cercano y orientado a resultados. Su compromiso es que te sientas acompañado, informado y tranquilo en cada paso de tu operación.</p>
+        <div class="about-stats reveal d3">
+          <div class="about-stat">
+            <strong>100%</strong>
+            <span>Asesoría personalizada</span>
+          </div>
+          <div class="about-stat">
+            <strong>24/7</strong>
+            <span>Acompañamiento vía WhatsApp</span>
+          </div>
+          <div class="about-stat">
+            <strong>0</strong>
+            <span>Trámites que enfrentes solo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROPIEDADES DESTACADAS — DARK ============ -->
+<section id="propiedades" aria-labelledby="propiedades-title">
+  <div class="container" style="padding:120px 0;">
+    <div class="section-header">
+      <p class="section-tag reveal">Propiedades Destacadas</p>
+      <h2 class="section-title reveal d1" id="propiedades-title" style="color:var(--white);">Encuentra <em>tu próxima propiedad</em></h2>
+      <p class="section-lead reveal d2" style="color:var(--text-muted);">Una muestra de las oportunidades que gestionamos en el área metropolitana de Monterrey. Nuestro catálogo completo se actualiza constantemente.</p>
+    </div>
+    <div class="rooms-grid">
+
+      <!-- PLACEHOLDER: reemplazar con propiedad real cuando el cliente la entregue -->
+      <article class="room-card reveal">
+        <div class="room-card-inner">
+          <img
+            src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=900&q=80"
+            alt="Villa moderna con alberca privada, ejemplo de residencia de lujo en venta"
+            class="room-card-img"
+            loading="lazy">
+          <div class="room-overlay"></div>
+          <div class="room-pills">
+            <span class="room-pill">4 Recámaras</span>
+            <span class="room-pill">Alberca Privada</span>
+            <span class="room-pill">Doble Garage</span>
+          </div>
+          <div class="room-content">
+            <p class="room-tag">Residencial · San Pedro Garza García</p>
+            <h3 class="room-name">Villa Contemporánea<br>con Alberca</h3>
+            <p class="room-desc">Residencia de diseño contemporáneo con acabados de lujo, alberca privada y amplios espacios para vivir y recibir con estilo.</p>
+            <p class="room-price">$18,500,000 <span>MXN · Venta</span></p>
+          </div>
+        </div>
+      </article>
+
+      <!-- PLACEHOLDER: reemplazar con propiedad real cuando el cliente la entregue -->
+      <article class="room-card reveal d1">
+        <div class="room-card-inner">
+          <img
+            src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=900&q=80"
+            alt="Sala de departamento moderno amueblado, ejemplo de propiedad en renta"
+            class="room-card-img"
+            loading="lazy">
+          <div class="room-overlay"></div>
+          <div class="room-pills">
+            <span class="room-pill">2 Recámaras</span>
+            <span class="room-pill">Amueblado</span>
+            <span class="room-pill">Amenidades</span>
+          </div>
+          <div class="room-content">
+            <p class="room-tag">Departamento · Valle Oriente</p>
+            <h3 class="room-name">Depto. Ejecutivo<br>Amueblado</h3>
+            <p class="room-desc">Departamento moderno y funcional, ideal para ejecutivos o parejas, en zona de alta plusvalía con amenidades de primer nivel.</p>
+            <p class="room-price">$28,000 <span>MXN · Renta mensual</span></p>
+          </div>
+        </div>
+      </article>
+
+      <!-- PLACEHOLDER: reemplazar con propiedad real cuando el cliente la entregue -->
+      <article class="room-card reveal d2">
+        <div class="room-card-inner">
+          <img
+            src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=900&q=80"
+            alt="Casa familiar de estilo tradicional con porche y jardín amplio"
+            class="room-card-img"
+            loading="lazy">
+          <div class="room-overlay"></div>
+          <div class="room-pills">
+            <span class="room-pill">3 Recámaras</span>
+            <span class="room-pill">Jardín Amplio</span>
+            <span class="room-pill">Zona Segura</span>
+          </div>
+          <div class="room-content">
+            <p class="room-tag">Casa Familiar · Área Metropolitana MTY</p>
+            <h3 class="room-name">Casa Familiar<br>de Dos Plantas</h3>
+            <p class="room-desc">Hogar cálido y espacioso pensado para familias, en fraccionamiento con seguridad y áreas verdes para disfrutar en comunidad.</p>
+            <p class="room-price">$6,900,000 <span>MXN · Venta</span></p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+    <div style="text-align:center;margin-top:48px;">
+      <a href="https://wa.me/528189941554" target="_blank" rel="noopener" class="btn-ghost reveal">Consultar Catálogo Completo</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICIOS — WHITE ============ -->
+<section id="servicios" aria-labelledby="servicios-title">
+  <div class="container" style="padding:120px 0;">
+    <div class="section-header">
+      <p class="section-tag reveal">Servicios</p>
+      <h2 class="section-title reveal d1" id="servicios-title">Todo en <em>bienes raíces</em></h2>
+      <p class="section-lead reveal d2" style="color:var(--text-mid);">Un servicio integral pensado para que tu operación inmobiliaria avance sin fricciones, del primer contacto hasta la firma.</p>
+    </div>
+    <div class="amenities-grid">
+      <div class="amenity-card reveal">
+        <div class="amenity-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><path d="M8 2v16M16 6v16"/></svg></div>
+        <h3 class="amenity-name">Compra de Propiedades</h3>
+        <p class="amenity-desc">Te ayudamos a encontrar la propiedad ideal según tus necesidades, presupuesto y zona de interés en Monterrey.</p>
+      </div>
+      <div class="amenity-card reveal d1">
+        <div class="amenity-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 010-1.1M1.42 9a16 16 0 000 6M8.53 16.11a6 6 0 000-8.22"/><line x1="12" y1="12" x2="12.01" y2="12"/></svg></div>
+        <h3 class="amenity-name">Venta de Propiedades</h3>
+        <p class="amenity-desc">Damos visibilidad y seguimiento profesional a tu propiedad para venderla al mejor precio y en el menor tiempo posible.</p>
+      </div>
+      <div class="amenity-card reveal d2">
+        <div class="amenity-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <h3 class="amenity-name">Renta de Inmuebles</h3>
+        <p class="amenity-desc">Conectamos propietarios e inquilinos con contratos claros y un proceso de renta simple y confiable.</p>
+      </div>
+      <div class="amenity-card reveal d3">
+        <div class="amenity-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h3 class="amenity-name">Asesoría Patrimonial y de Inversión</h3>
+        <p class="amenity-desc">Analizamos el momento y la zona ideal para que tu inversión inmobiliaria crezca de forma inteligente.</p>
+      </div>
+      <div class="amenity-card reveal">
+        <div class="amenity-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <h3 class="amenity-name">Avalúos Profesionales</h3>
+        <p class="amenity-desc">Determinamos el valor real de tu propiedad con criterios de mercado actualizados y objetivos.</p>
+      </div>
+      <div class="amenity-card reveal d1">
+        <div class="amenity-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3 class="amenity-name">Trámites Legales y Notariales</h3>
+        <p class="amenity-desc">Te acompañamos en la revisión de contratos, escrituración y trámites ante notario con total certeza jurídica.</p>
+      </div>
+      <div class="amenity-card reveal d2">
+        <div class="amenity-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.86 9.8 19.79 19.79 0 01.79 1.1 2 2 0 012.77 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 8.77a16 16 0 006.29 6.29l1.13-1.13a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
+        <h3 class="amenity-name">Créditos Hipotecarios</h3>
+        <p class="amenity-desc">Te orientamos sobre las mejores opciones de financiamiento bancario para concretar tu compra.</p>
+      </div>
+      <div class="amenity-card reveal d3">
+        <div class="amenity-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+        <h3 class="amenity-name">Administración de Propiedades</h3>
+        <p class="amenity-desc">Cuidamos tu inmueble en renta con seguimiento cercano, para que tu patrimonio esté siempre en buenas manos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ¿POR QUÉ ELEGIRNOS? — GOLD ============ -->
+<section id="experience" aria-label="¿Por qué elegirnos?">
+  <div class="container" style="padding:96px 0;">
+    <div class="exp-inner">
+      <div class="exp-left reveal">
+        <p class="section-tag">¿Por Qué Elegirnos?</p>
+        <h2 class="exp-tagline"><em>Tu patrimonio en buenas manos,</em><br>respaldado por acompañamiento real.</h2>
+      </div>
+      <div class="exp-stats reveal d1">
+        <div class="exp-stat"><strong>100%</strong><span>Transparencia en cada operación</span></div>
+        <div class="exp-stat"><strong>24/7</strong><span>Acompañamiento vía WhatsApp</span></div>
+        <div class="exp-stat"><strong>0</strong><span>Sorpresas en tu proceso</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALERÍA — DARK, fotos reales ============ -->
+<section id="galeria" aria-labelledby="galeria-title">
+  <div class="container" style="padding:120px 0;">
+    <div class="section-header">
+      <p class="section-tag reveal">Portafolio</p>
+      <h2 class="section-title reveal d1" id="galeria-title">Espacios que <em>inspiran</em></h2>
+      <p class="section-lead reveal d2" style="color:var(--text-muted);">Cada propiedad cuenta una historia distinta. Estos son algunos de los espacios que ayudamos a nuestros clientes a encontrar.</p>
+    </div>
+    <div class="gallery-grid reveal d1">
+
+      <div class="gallery-item gi-1">
+        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80"
+             alt="Villa moderna con alberca infinita y vista panorámica al atardecer" loading="lazy">
+        <div class="gi-label">Residencias de Autor</div>
+      </div>
+
+      <div class="gallery-item gi-2">
+        <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=800&q=80"
+             alt="Fachada de casa minimalista blanca con jardín y entrada de acceso" loading="lazy">
+        <div class="gi-label">Diseño Contemporáneo</div>
+      </div>
+
+      <div class="gallery-item gi-3">
+        <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=80"
+             alt="Cocina moderna de diseño con acabados blancos y barra desayunadora" loading="lazy">
+        <div class="gi-label">Cocinas de Diseño</div>
+      </div>
+
+      <div class="gallery-item gi-4">
+        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=800&q=80"
+             alt="Casa de estilo campestre iluminada al anochecer, rodeada de jardín" loading="lazy">
+        <div class="gi-label">Hogares con Carácter</div>
+      </div>
+
+      <div class="gallery-item gi-5">
+        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80"
+             alt="Villa moderna con alberca y techo de madera, ideal para vivir en familia" loading="lazy">
+        <div class="gi-label">Espacios para Vivir</div>
+      </div>
+
+      <div class="gallery-item gi-6">
+        <img src="https://images.unsplash.com/photo-1517935706615-2717063c2225?auto=format&fit=crop&w=800&q=80"
+             alt="Panorama urbano nocturno, referencia del crecimiento y plusvalía de las zonas donde operamos" loading="lazy">
+        <div class="gi-label">Desarrollo Urbano</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIOS — CREAM ============ -->
+<!-- ============ TESTIMONIOS — LIGHT GRAY ============ -->
+<!-- PLACEHOLDER: reemplazar con testimonios reales de clientes -->
+<section id="testimonios" aria-labelledby="testimonios-title">
+  <div class="container" style="padding:120px 0;">
+    <div class="section-header">
+      <p class="section-tag reveal">Testimonios</p>
+      <h2 class="section-title reveal d1" id="testimonios-title">Lo que dicen nuestros <em>clientes</em></h2>
+      <p class="section-lead reveal d2" style="color:var(--text-mid);">La mejor garantía es la experiencia de quienes ya confiaron su patrimonio a Valora Realty.</p>
+    </div>
+    <div class="reviews-grid reveal d1">
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Luis nos guio en la compra de nuestra casa en San Pedro con total honestidad. Nos explicó cada paso del proceso y nunca sentimos presión, solo acompañamiento real."</p>
+        <div class="review-author">
+          <div class="review-avatar">R</div>
+          <div class="review-name">
+            <strong>Familia Reyes</strong>
+            <span>Compra de Casa en San Pedro</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Vendimos nuestro departamento en menos tiempo del que esperábamos y al precio justo. Valora Realty se encargó de todo, incluso de los trámites más tediosos."</p>
+        <div class="review-author">
+          <div class="review-avatar">M</div>
+          <div class="review-name">
+            <strong>Mariana Cantú</strong>
+            <span>Venta de Departamento</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Buscábamos asesoría seria para invertir en bienes raíces y encontramos justo eso: análisis claro, cero improvisación y resultados que respaldan la confianza depositada."</p>
+        <div class="review-author">
+          <div class="review-avatar">G</div>
+          <div class="review-name">
+            <strong>Grupo Vega Inversiones</strong>
+            <span>Asesoría de Inversión Patrimonial</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div style="text-align:center;margin-top:52px;" class="reveal">
+      <a href="https://wa.me/528189941554" target="_blank" rel="noopener" class="btn-ghost-dark">Agenda tu Asesoría →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO — DARK ============ -->
+<section id="contacto" aria-labelledby="contacto-title">
+  <div class="container" style="padding:120px 0;">
+    <div class="section-header">
+      <p class="section-tag reveal">Contáctanos</p>
+      <h2 class="section-title reveal d1" id="contacto-title" style="color:var(--white);">Hablemos de tu <em>próxima propiedad</em></h2>
+      <p class="section-lead reveal d2" style="color:var(--text-muted);">Cuéntanos qué buscas —comprar, vender, rentar o invertir— y Luis García Sosa te contactará directamente, sin costo ni compromiso.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-left reveal">
+        <p class="section-tag no-lines">Solicita tu Asesoría</p>
+        <h3 class="contact-title">Escríbenos y <em>conversemos</em></h3>
+        <p class="contact-sub">Completa el formulario con los detalles de tu operación inmobiliaria. Te contactaremos por WhatsApp en menos de 24 horas con una respuesta clara y sin compromiso.</p>
+        <form id="booking-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nombre">Nombre completo</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required autocomplete="name">
+            </div>
+            <div class="form-group">
+              <label for="telefono">Teléfono / WhatsApp</label>
+              <input type="tel" id="telefono" name="telefono" placeholder="+52 000 000 0000" required autocomplete="tel">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="zona">Zona de interés</label>
+              <input type="text" id="zona" name="zona" placeholder="Ej. San Pedro, Valle Oriente, Cumbres..." required>
+            </div>
+            <div class="form-group">
+              <label for="presupuesto">Presupuesto aproximado</label>
+              <input type="text" id="presupuesto" name="presupuesto" placeholder="Ej. $3,000,000 MXN">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="operacion">Tipo de operación</label>
+              <select id="operacion" name="operacion">
+                <option value="">Seleccionar...</option>
+                <option value="Compra">Compra</option>
+                <option value="Venta">Venta</option>
+                <option value="Renta">Renta</option>
+                <option value="Asesoría Patrimonial / Inversión">Asesoría Patrimonial / Inversión</option>
+                <option value="Aún no lo sé — quiero asesoría">Aún no lo sé — quiero asesoría</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="contacto_pref">¿Cómo prefieres que te contactemos?</label>
+              <select id="contacto_pref" name="contacto_pref">
+                <option value="WhatsApp" selected>WhatsApp</option>
+                <option value="Llamada telefónica">Llamada telefónica</option>
+                <option value="Correo electrónico">Correo electrónico</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="mensaje">Cuéntanos más sobre lo que buscas</label>
+            <textarea id="mensaje" name="mensaje" placeholder="Número de recámaras, plazo estimado, motivo de la operación..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Quiero mi Asesoría Gratuita →</button>
+        </form>
+      </div>
+      <div class="contact-right reveal d1">
+        <p class="section-tag no-lines">Otras Formas de Contacto</p>
+        <h3 class="contact-title">También <em>puedes</em><br>contactarnos así</h3>
+        <div class="channels">
+          <a href="https://wa.me/528189941554" target="_blank" rel="noopener" class="channel" aria-label="WhatsApp">
+            <div class="ch-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </div>
+            <div class="ch-info"><strong>WhatsApp</strong><span>+52 818 994 1554 · Respuesta inmediata</span></div>
+            <svg class="ch-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+          <a href="tel:+528189941554" class="channel" aria-label="Llamada">
+            <div class="ch-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.86 9.8 19.79 19.79 0 01.79 1.1 2 2 0 012.77 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 8.77a16 16 0 006.29 6.29l1.13-1.13a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div class="ch-info"><strong>Llamada Directa</strong><span>+52 818 994 1554 · Habla con Luis García Sosa</span></div>
+            <svg class="ch-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+          <a href="https://www.instagram.com/valorarealty" target="_blank" rel="noopener" class="channel" aria-label="Instagram">
+            <div class="ch-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </div>
+            <div class="ch-info"><strong>Instagram</strong><span>@valorarealty · Síguenos</span></div>
+            <svg class="ch-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+        </div>
+        <div class="contact-quote">
+          <p>"Nos comprometemos a asesorarte con la misma seriedad y cuidado con la que protegerías tu propio patrimonio. Respuesta en menos de 24 horas."</p>
+          <cite>— Luis García Sosa, Valora Realty</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-wrap">
+        <div class="footer-logo-pill">
+          <svg viewBox="0 0 100 100" role="img" aria-label="Valora Realty">
+            <circle cx="50" cy="50" r="47" fill="#0B1F3A" stroke="#C9A227" stroke-width="2.5"/>
+            <text x="50" y="63" text-anchor="middle" font-family="'Sora', sans-serif" font-size="34" font-weight="700" fill="#C9A227" letter-spacing="1">VR</text>
+          </svg>
+        </div>
+        <div class="footer-logo-text">
+          <strong>Valora Realty</strong>
+          <small>Bienes Raíces</small>
+        </div>
+      </div>
+      <p>Tu Patrimonio en Buenas Manos. Compra, venta, renta y asesoría patrimonial en el área metropolitana de Monterrey.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navegación</h4>
+      <ul>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#propiedades">Propiedades</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="#servicios">Compra de Propiedades</a></li>
+        <li><a href="#servicios">Venta de Propiedades</a></li>
+        <li><a href="#servicios">Renta de Inmuebles</a></li>
+        <li><a href="#servicios">Asesoría Patrimonial</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="https://wa.me/528189941554" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="tel:+528189941554">+52 818 994 1554</a></li>
+        <li><a href="#testimonios">Testimonios</a></li>
+        <li><a href="#contacto">Solicitar Asesoría</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Valora Realty. Todos los derechos reservados.</p>
+    <!-- PLACEHOLDER: redes sociales reales pendientes de confirmar con el cliente -->
+    <div class="social-links">
+      <a href="#" class="social-link" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <a href="https://www.instagram.com/valorarealty" class="social-link" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="https://wa.me/528189941554" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ WHATSAPP FLOAT ============ -->
+<a href="https://wa.me/528189941554"
+   id="wa-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+  <div class="wa-ring-2" aria-hidden="true"></div>
+  <div class="wa-ring"   aria-hidden="true"></div>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+(function () {
+  'use strict';
+
+  /* ---- LOADER ---- */
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      var el = document.getElementById('loader');
+      if (el) el.classList.add('hidden');
+    }, 1800);
+  });
+
+  /* ---- NAV SCROLL ---- */
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function () {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  /* ---- MOBILE MENU ---- */
+  var ham = document.getElementById('ham');
+  var mob = document.getElementById('mobile-menu');
+  var mOpen = false;
+
+  function closeMob() {
+    mOpen = false;
+    ham.classList.remove('open');
+    mob.classList.remove('open');
+    ham.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  window.closeMob = closeMob;
+
+  ham.addEventListener('click', function () {
+    mOpen = !mOpen;
+    ham.classList.toggle('open', mOpen);
+    mob.classList.toggle('open', mOpen);
+    ham.setAttribute('aria-expanded', String(mOpen));
+    document.body.style.overflow = mOpen ? 'hidden' : '';
+  });
+
+  /* ---- PARTICLE SYSTEM  (hero only) ---- */
+  (function () {
+    var canvas = document.getElementById('particle-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var W, H, pts = [], raf;
+
+    var COLS = [
+      'rgba(201,162,39,',
+      'rgba(232,196,104,',
+      'rgba(240,213,122,',
+      'rgba(255,255,255,'
+    ];
+
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    function Pt() { this.init(); }
+    Pt.prototype.init = function () {
+      this.x  = Math.random() * W;
+      this.y  = Math.random() * H;
+      this.r  = Math.random() * 3.2 + 0.7;
+      this.vx = (Math.random() - 0.5) * 0.38;
+      this.vy = (Math.random() - 0.5) * 0.38;
+      this.a0 = Math.random() * 0.55 + 0.18;
+      this.ps = Math.random() * 0.028 + 0.014;
+      this.po = Math.random() * Math.PI * 2;
+      this.ci = Math.floor(Math.random() * COLS.length);
+      this.a  = this.a0;
+    };
+    Pt.prototype.step = function (t) {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.a = this.a0 + Math.sin(t * this.ps + this.po) * 0.42;
+      if (this.x < -4) this.x = W + 4;
+      if (this.x > W + 4) this.x = -4;
+      if (this.y < -4) this.y = H + 4;
+      if (this.y > H + 4) this.y = -4;
+    };
+    Pt.prototype.draw = function () {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, 6.2832);
+      ctx.fillStyle = COLS[this.ci] + this.a + ')';
+      ctx.fill();
+    };
+
+    var N = Math.min(140, Math.floor(W / 9));
+    for (var i = 0; i < N; i++) pts.push(new Pt());
+
+    function drawLines() {
+      var MAX = 135;
+      for (var a = 0; a < pts.length - 1; a++) {
+        for (var b = a + 1; b < pts.length; b++) {
+          var dx = pts[a].x - pts[b].x;
+          var dy = pts[a].y - pts[b].y;
+          var d = Math.sqrt(dx * dx + dy * dy);
+          if (d < MAX) {
+            ctx.beginPath();
+            ctx.moveTo(pts[a].x, pts[a].y);
+            ctx.lineTo(pts[b].x, pts[b].y);
+            ctx.strokeStyle = 'rgba(201,162,39,' + ((1 - d / MAX) * 0.16) + ')';
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    var tick = 0;
+    function loop() {
+      ctx.clearRect(0, 0, W, H);
+      tick++;
+      for (var i = 0; i < pts.length; i++) { pts[i].step(tick); pts[i].draw(); }
+      drawLines();
+      raf = requestAnimationFrame(loop);
+    }
+    loop();
+
+    /* Pause outside viewport */
+    var hero = document.getElementById('hero');
+    new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) {
+        if (!raf) loop();
+      } else {
+        cancelAnimationFrame(raf);
+        raf = null;
+      }
+    }, { threshold: 0.01 }).observe(hero);
+  }());
+
+  /* ---- TYPEWRITER ---- */
+  (function () {
+    var words = ['compra', 'venta', 'renta', 'asesoría patrimonial', 'inversión inteligente'];
+    var wi = 0, ci = 0, deleting = false;
+    var el = document.getElementById('typer');
+    if (!el) return;
+
+    function tick() {
+      var w = words[wi];
+      if (!deleting) {
+        el.textContent = w.slice(0, ++ci);
+        if (ci === w.length) {
+          deleting = true;
+          setTimeout(tick, 2400);
+          return;
+        }
+        setTimeout(tick, 115);
+      } else {
+        el.textContent = w.slice(0, --ci);
+        if (ci === 0) {
+          deleting = false;
+          wi = (wi + 1) % words.length;
+        }
+        setTimeout(tick, 72);
+      }
+    }
+    /* Start after hero entrance animations finish */
+    setTimeout(tick, 2800);
+  }());
+
+  /* ---- SCROLL REVEAL ---- */
+  var revealEls = document.querySelectorAll('.reveal');
+  var revealIO = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealIO.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.09, rootMargin: '0px 0px -32px 0px' });
+  revealEls.forEach(function (el) { revealIO.observe(el); });
+
+  /* ---- FORMULARIO DE ASESORÍA → WhatsApp ---- */
+  var form = document.getElementById('booking-form');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var n      = document.getElementById('nombre').value.trim();
+      var t      = document.getElementById('telefono').value.trim();
+      var zona   = document.getElementById('zona').value.trim();
+      var presu  = document.getElementById('presupuesto').value.trim();
+      var op     = document.getElementById('operacion').value;
+      var pref   = document.getElementById('contacto_pref').value;
+      var m      = document.getElementById('mensaje').value.trim();
+
+      if (!n || !t || !zona) {
+        alert('Por favor completa: nombre, teléfono y zona de interés.');
+        return;
+      }
+
+      var msg = [
+        '🏠 *Valora Realty — Solicitud de Asesoría*',
+        '',
+        '👤 *Nombre:* '              + n,
+        '📞 *Teléfono:* '            + t,
+        '📍 *Zona de interés:* '     + zona,
+        presu ? '💰 *Presupuesto aproximado:* ' + presu : null,
+        '🏷️ *Tipo de operación:* '  + (op || 'Por definir'),
+        '☎️ *Prefiere contacto por:* ' + pref,
+        m ? '💬 *Notas:* ' + m : null,
+        '',
+        'Quisiera recibir asesoría. ¡Gracias!'
+      ].filter(Boolean).join('\n');
+
+      window.open(
+        'https://wa.me/528189941554?text=' + encodeURIComponent(msg),
+        '_blank', 'noopener'
+      );
+    });
+  }
+
+}());
+</script>
+</body>
+</html>
