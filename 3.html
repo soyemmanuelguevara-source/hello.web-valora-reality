@@ -273,10 +273,16 @@ ul { list-style: none; }
   font-family: var(--font-heading);
   font-size: clamp(18px, 2.8vw, 28px);
   font-weight: 400; font-style: normal;
-  color: rgba(255,255,255,0.55); letter-spacing: 2px;
+  color: rgba(255,255,255,0.55); 
+  letter-spacing: 2px;
   margin-bottom: 36px;
-  opacity: 0; transform: translateY(24px);
-  animation: fadeUp 1s var(--ease-out) 0.7s forwards;
+  opacity: 0; 
+  transform: translateY(24px);
+  animation: fadeUp 1s var(--ease-out) 0.7s forwards, subtitleShimmer 4s ease-in-out 2s infinite;
+}
+@keyframes subtitleShimmer {
+  0%, 100% { color: rgba(255,255,255,0.55); }
+  50% { color: rgba(232,196,104,0.75); }
 }
 /* Typewriter */
 .typer-word {
@@ -309,25 +315,43 @@ ul { list-style: none; }
 }
 
 .btn-primary {
-  padding: 16px 44px; background: var(--gold);
-  color: var(--black); font-size: 10px; letter-spacing: 3px;
-  text-transform: uppercase; font-weight: 600;
+  padding: 16px 44px; 
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: var(--black); 
+  font-size: 10px; 
+  letter-spacing: 3px;
+  text-transform: uppercase; 
+  font-weight: 600;
   font-family: var(--font-sans);
   transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
   display: inline-block;
+  box-shadow: 0 4px 16px rgba(201,162,39,0.25);
 }
-.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(201,162,39,0.35); }
+.btn-primary:hover { 
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  transform: translateY(-3px); 
+  box-shadow: 0 12px 36px rgba(201,162,39,0.45);
+}
 
 .btn-ghost {
   padding: 15px 44px;
-  border: 1px solid rgba(255,255,255,0.22);
-  color: var(--white); font-size: 10px; letter-spacing: 3px;
-  text-transform: uppercase; font-weight: 400;
+  border: 2px solid rgba(255,255,255,0.28);
+  color: var(--white); 
+  font-size: 10px; 
+  letter-spacing: 3px;
+  text-transform: uppercase; 
+  font-weight: 400;
   font-family: var(--font-sans);
-  transition: border-color 0.3s, color 0.3s, transform 0.3s;
+  transition: border-color 0.3s, color 0.3s, transform 0.3s, background 0.3s, box-shadow 0.3s;
   display: inline-block;
 }
-.btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+.btn-ghost:hover { 
+  border-color: var(--gold); 
+  color: var(--gold); 
+  background: rgba(201,162,39,0.08);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(201,162,39,0.2);
+}
 
 .hero-scroll {
   position: absolute; bottom: 30px; left: 50%;
@@ -385,32 +409,59 @@ ul { list-style: none; }
   display: inline-flex; align-items: center; gap: 10px;
   font-size: 9.5px; letter-spacing: 4px; text-transform: uppercase;
   color: var(--gold); font-weight: 500; margin-bottom: 18px;
+  animation: tagGlow 3s ease-in-out infinite;
 }
 .section-tag::before, .section-tag::after {
   content: ''; display: block; width: 26px; height: 1px; background: var(--gold); opacity: 0.45;
 }
 .section-tag.no-lines::before, .section-tag.no-lines::after { display: none; }
+@keyframes tagGlow { 0%,100%{opacity:1;} 50%{opacity:0.7; text-shadow: 0 0 8px rgba(201,162,39,0.5);} }
 
 .section-title {
   font-family: var(--font-heading);
   font-size: clamp(34px,5vw,62px);
   font-weight: 700; line-height: 1.08; letter-spacing: -0.5px;
+  animation: titleShift 0.8s var(--ease-out) forwards;
 }
-.section-title em { font-style: normal; font-weight: 800; color: var(--gold); }
+.section-title em { 
+  font-style: normal; font-weight: 800;
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold-light), var(--gold-dark));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: emShimmer 4s ease-in-out infinite;
+}
+@keyframes titleShift { from { opacity: 0; transform: translateY(20px); letter-spacing: -2px; } to { opacity: 1; transform: translateY(0); letter-spacing: -0.5px; } }
+@keyframes emShimmer { 0%,100%{background-position:200% center;} 50%{background-position:-200% center;} }
+
 .section-lead {
   margin-top: 18px; font-size: 15px; max-width: 540px;
   margin-left: auto; margin-right: auto;
   line-height: 1.85; font-weight: 300;
+  animation: leadFade 1s var(--ease-out) 0.2s both;
 }
+@keyframes leadFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
 .section-header { text-align: center; margin-bottom: 68px; }
 
 /* =============================================
-   ABOUT  — CREAM section
+   ABOUT  — CREAM section with Premium Background
 ============================================= */
 #nosotros {
   padding: 120px 0;
-  background: var(--cream);
+  background: linear-gradient(135deg, var(--cream) 0%, #F8F7F4 50%, var(--cream) 100%);
+  background-attachment: fixed;
+  position: relative;
 }
+#nosotros::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: url('data:image/svg+xml,%3Csvg width="100" height="100" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3ClinearGradient id="grad" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%23C9A227;stop-opacity:0.04" /%3E%3Cstop offset="100%25" style="stop-color:%23C9A227;stop-opacity:0.02" /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width="100" height="100" fill="url(%23grad)"%3E%3C/rect%3E%3C/svg%3E');
+  pointer-events: none;
+  z-index: 0;
+}
+#nosotros .container { position: relative; z-index: 1; }
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
 
 /* Visual */
@@ -450,85 +501,55 @@ ul { list-style: none; }
 .about-stat span   { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-soft); font-weight: 400; }
 
 /* =============================================
-   EXPERIENCIAS (rooms)  — DARK section con fotos reales
+   AMENITIES (Ventajas)  — PREMIUM section with gradient background
 ============================================= */
-#propiedades { padding: 120px 0; background: var(--dark-2); }
-
-.rooms-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; }
-.room-card { position: relative; overflow: hidden; cursor: pointer; }
-.room-card-inner { aspect-ratio: 3/4; position: relative; overflow: hidden; }
-
-.room-card-img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center;
-  transition: transform 0.9s var(--ease-out);
+#servicios { 
+  padding: 120px 0; 
+  background: linear-gradient(180deg, var(--white) 0%, #FAFAF8 100%);
+  background-attachment: fixed;
+  position: relative;
+  overflow: hidden;
 }
-.room-card:hover .room-card-img { transform: scale(1.07); }
-
-.room-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 55%, transparent 100%);
-  z-index: 1;
+#servicios::before {
+  content: '';
+  position: absolute; top: -50%; right: -20%; width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(201,162,39,0.08) 0%, transparent 70%);
+  pointer-events: none;
 }
-.room-content {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  padding: 30px 24px; z-index: 2;
-  transform: translateY(6px);
-  transition: transform 0.5s var(--ease-out);
+#servicios::after {
+  content: '';
+  position: absolute; bottom: -30%; left: -10%; width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(201,162,39,0.05) 0%, transparent 60%);
+  pointer-events: none;
 }
-.room-card:hover .room-content { transform: translateY(0); }
-
-.room-tag { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 8px; }
-.room-name { font-family: var(--font-heading); font-size: 24px; font-weight: 600; color: var(--white); line-height: 1.2; margin-bottom: 10px; }
-.room-desc {
-  font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 14px;
-  max-height: 0; overflow: hidden; opacity: 0;
-  transition: max-height 0.5s var(--ease-out), opacity 0.45s;
-}
-.room-card:hover .room-desc { max-height: 92px; opacity: 1; }
-.room-price { font-family: var(--font-heading); font-size: 20px; font-weight: 600; color: var(--gold); }
-.room-price span { font-size: 11px; color: var(--text-dim); font-family: var(--font-sans); letter-spacing: 1px; }
-
-.room-pills {
-  position: absolute; top: 18px; right: 18px; z-index: 2;
-  display: flex; flex-direction: column; gap: 5px;
-  opacity: 0; transform: translateX(8px);
-  transition: opacity 0.4s, transform 0.4s var(--ease-out);
-}
-.room-card:hover .room-pills { opacity: 1; transform: translateX(0); }
-.room-pill {
-  background: rgba(6,6,6,0.82); backdrop-filter: blur(8px);
-  border: 1px solid var(--border-d);
-  padding: 4px 9px; font-size: 9px; color: var(--gold);
-  letter-spacing: 1.5px; text-transform: uppercase;
-}
-
-/* =============================================
-   AMENITIES (Ventajas)  — WHITE section
-============================================= */
-#servicios { padding: 120px 0; background: var(--white); }
+#servicios .container { position: relative; z-index: 1; }
 #servicios .section-title { color: var(--text-dark); }
 #servicios .section-lead  { color: var(--text-mid); }
 
 .amenities-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; margin-top: 68px; }
 .amenity-card {
-  background: var(--cream); padding: 44px 28px;
-  border: 1px solid rgba(201,162,39,0.12);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-  transition: border-color 0.4s, box-shadow 0.4s, transform 0.4s var(--ease-out);
-  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, var(--cream) 0%, #FAFAF8 100%);
+  padding: 48px 32px;
+  border: 1.5px solid rgba(201,162,39,0.18);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  transition: border-color 0.4s, box-shadow 0.4s, transform 0.4s var(--ease-out), background 0.4s;
+  position: relative; 
+  overflow: hidden;
 }
 .amenity-card::after {
-  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-  height: 2px; background: var(--gold);
-  transform: scaleX(0); transform-origin: left;
+  content: ''; 
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 3px; 
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold-light), var(--gold-dark));
+  transform: scaleX(0); 
+  transform-origin: left;
   transition: transform 0.4s var(--ease-out);
 }
 .amenity-card:hover {
-  border-color: rgba(201,162,39,0.35);
-  box-shadow: 0 8px 36px rgba(0,0,0,0.09);
-  transform: translateY(-5px);
+  border-color: rgba(201,162,39,0.45);
+  box-shadow: 0 12px 48px rgba(201,162,39,0.15);
+  transform: translateY(-8px);
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--cream) 100%);
 }
 .amenity-card:hover::after { transform: scaleX(1); }
 
@@ -538,9 +559,82 @@ ul { list-style: none; }
 .amenity-desc { font-size: 13px; color: var(--text-mid); line-height: 1.75; font-weight: 300; }
 
 /* =============================================
-   EXPERIENCE BAND  — GOLD
+   BANNER PREMIUM — Full Width Background Image with Text
 ============================================= */
-#experience { padding: 96px 0; background: var(--gold); position: relative; overflow: hidden; }
+#banner-premium {
+  position: relative;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.banner-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 35%;
+  background-attachment: fixed;
+  z-index: 0;
+}
+
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.65) 0%, rgba(10,15,30,0.55) 50%, rgba(0,0,0,0.65) 100%);
+  z-index: 1;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 60px 24px;
+  max-width: 800px;
+}
+
+.banner-title {
+  font-family: var(--font-heading);
+  font-size: clamp(36px, 5vw, 58px);
+  font-weight: 700;
+  line-height: 1.12;
+  color: var(--white);
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+
+.banner-title em {
+  font-style: normal;
+  font-weight: 800;
+  background: linear-gradient(90deg, var(--gold-light), #FFE5A0, var(--gold-light));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: emShimmer 4s ease-in-out infinite;
+}
+
+.banner-subtitle {
+  font-size: clamp(16px, 2.2vw, 22px);
+  font-weight: 400;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 36px;
+  line-height: 1.7;
+  letter-spacing: 0.5px;
+}
+
+/* =============================================
+   EXPERIENCE BAND  — PREMIUM GOLD GRADIENT
+============================================= */
+#experience { 
+  padding: 96px 0; 
+  background: linear-gradient(135deg, var(--gold) 0%, #D4B453 50%, var(--gold) 100%);
+  background-attachment: fixed;
+  position: relative; 
+  overflow: hidden;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.15);
+}
 #experience::before {
   content: 'VALORA REALTY';
   position: absolute; font-family: var(--font-heading);
@@ -561,47 +655,13 @@ ul { list-style: none; }
 .exp-stat span { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(0,0,0,0.5); font-weight: 600; }
 
 /* =============================================
-   GALLERY  — DARK, imágenes reales
+   LOCATION  — CREAM section (Premium Background)
 ============================================= */
-#galeria { padding: 120px 0; background: var(--dark); }
-#galeria .section-title { color: var(--white); }
-#galeria .section-lead  { color: var(--text-muted); }
-
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 330px 260px;
-  gap: 4px;
-  margin-top: 68px;
+#location { 
+  padding: 120px 0; 
+  background: linear-gradient(135deg, var(--cream-2) 0%, #F0EDE8 100%);
+  background-attachment: fixed;
 }
-.gallery-item { overflow: hidden; position: relative; cursor: pointer; }
-.gallery-item img {
-  width: 100%; height: 100%;
-  object-fit: cover; display: block;
-  transition: transform 0.85s var(--ease-out), filter 0.5s;
-}
-.gallery-item:hover img { transform: scale(1.06); filter: brightness(0.7); }
-.gi-label {
-  position: absolute; bottom: 0; left: 0; right: 0; padding: 18px 20px;
-  background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
-  font-family: var(--font-heading); font-size: 15px; color: var(--white);
-  opacity: 0; transform: translateY(6px);
-  transition: opacity 0.4s, transform 0.4s var(--ease-out);
-  z-index: 2;
-}
-.gallery-item:hover .gi-label { opacity: 1; transform: translateY(0); }
-
-.gi-1 { grid-column: 1/7;  }
-.gi-2 { grid-column: 7/10; }
-.gi-3 { grid-column: 10/13;}
-.gi-4 { grid-column: 1/5;  }
-.gi-5 { grid-column: 5/9;  }
-.gi-6 { grid-column: 9/13; }
-
-/* =============================================
-   LOCATION  — CREAM section (no usado actualmente)
-============================================= */
-#location { padding: 120px 0; background: var(--cream-2); }
 .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
 
 .map-box {
@@ -634,19 +694,35 @@ ul { list-style: none; }
 .loc-val { font-size: 14px; color: var(--text-mid); line-height: 1.7; }
 
 /* =============================================
-   TESTIMONIOS  — CREAM
+   TESTIMONIOS  — PREMIUM GRADIENT
 ============================================= */
-#testimonios { padding: 120px 0; background: var(--cream-2); }
+#testimonios { 
+  padding: 120px 0; 
+  background: linear-gradient(180deg, #F5F3F0 0%, var(--cream-2) 100%);
+  background-attachment: fixed;
+  position: relative;
+  overflow: hidden;
+}
+#testimonios::before {
+  content: '';
+  position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(201,162,39,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+#testimonios .container { position: relative; z-index: 1; }
 #testimonios .section-title { color: var(--text-dark); }
 #testimonios .section-lead  { color: var(--text-mid); }
 
 .reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; }
 .review-card {
-  background: var(--white);
-  padding: 40px 32px;
-  border: 1px solid rgba(201,162,39,0.14);
-  position: relative; overflow: hidden;
-  transition: box-shadow 0.4s, transform 0.4s var(--ease-out);
+  background: linear-gradient(135deg, var(--white) 0%, #FAFAF8 100%);
+  padding: 44px 36px;
+  border: 1.5px solid rgba(201,162,39,0.16);
+  position: relative; 
+  overflow: hidden;
+  transition: box-shadow 0.4s, transform 0.4s var(--ease-out), border-color 0.4s;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
 }
 .review-card::before {
   content: '\201C';
@@ -654,7 +730,11 @@ ul { list-style: none; }
   font-family: var(--font-heading); font-size: 90px; font-weight: 600;
   color: rgba(201,162,39,0.12); line-height: 1; pointer-events: none;
 }
-.review-card:hover { box-shadow: 0 14px 52px rgba(0,0,0,0.1); transform: translateY(-5px); }
+.review-card:hover { 
+  box-shadow: 0 20px 60px rgba(201,162,39,0.12);
+  transform: translateY(-8px);
+  border-color: rgba(201,162,39,0.28);
+}
 .review-stars { color: var(--gold); font-size: 15px; letter-spacing: 2px; margin-bottom: 18px; }
 .review-text {
   font-family: var(--font-heading); font-size: 16px; font-weight: 400; font-style: normal;
@@ -673,19 +753,34 @@ ul { list-style: none; }
 .review-name strong { display: block; font-size: 13px; font-weight: 500; color: var(--text-dark); margin-bottom: 2px; }
 .review-name span   { font-size: 11px; color: var(--text-soft); letter-spacing: 0.5px; }
 .btn-ghost-dark {
-  display: inline-block; padding: 14px 40px;
-  border: 1px solid rgba(0,0,0,0.18);
-  color: var(--text-dark); font-size: 10px; letter-spacing: 3px;
-  text-transform: uppercase; font-weight: 400;
+  display: inline-block; 
+  padding: 14px 40px;
+  border: 2px solid rgba(0,0,0,0.22);
+  color: var(--text-dark); 
+  font-size: 10px; 
+  letter-spacing: 3px;
+  text-transform: uppercase; 
+  font-weight: 400;
   font-family: var(--font-sans);
-  transition: border-color 0.3s, color 0.3s;
+  transition: border-color 0.3s, color 0.3s, background 0.3s, transform 0.3s;
 }
-.btn-ghost-dark:hover { border-color: var(--gold); color: var(--gold-dark); }
+.btn-ghost-dark:hover { 
+  border-color: var(--gold); 
+  color: var(--gold); 
+  background: rgba(201,162,39,0.08);
+  transform: translateY(-2px);
+}
 
 /* =============================================
-   CONTACT (Cotizaciones) — DARK
+   CONTACT (Cotizaciones) — PREMIUM DARK GRADIENT
 ============================================= */
-#contacto { padding: 120px 0; background: var(--dark-2); position: relative; overflow: hidden; }
+#contacto { 
+  padding: 120px 0; 
+  background: linear-gradient(135deg, var(--dark-2) 0%, #1B2D42 50%, var(--dark-2) 100%);
+  background-attachment: fixed;
+  position: relative; 
+  overflow: hidden;
+}
 #contacto::before {
   content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
   width: 600px; height: 600px;
@@ -706,52 +801,113 @@ ul { list-style: none; }
 .form-group input,
 .form-group select,
 .form-group textarea {
-  background: transparent; border: 1px solid var(--border-d);
-  padding: 13px 16px; color: var(--white);
-  font-family: var(--font-sans); font-size: 14px; font-weight: 300;
-  outline: none; -webkit-appearance: none; appearance: none; border-radius: 0;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  background: rgba(255,255,255,0.05); 
+  border: 1.5px solid var(--border-d);
+  padding: 13px 16px; 
+  color: var(--white);
+  font-family: var(--font-sans); 
+  font-size: 14px; 
+  font-weight: 300;
+  outline: none; 
+  -webkit-appearance: none; 
+  appearance: none; 
+  border-radius: 0;
+  transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
 }
-.form-group select { background: var(--dark-3); cursor: pointer; }
+.form-group select { background: rgba(27,58,99,0.8); cursor: pointer; }
 .form-group select option { background: var(--dark-3); color: var(--white); }
 .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-dim); }
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,162,39,0.12); }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { 
+  border-color: var(--gold); 
+  background: rgba(201,162,39,0.08);
+  box-shadow: 0 0 0 3px rgba(201,162,39,0.15);
+}
 .form-group input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1) opacity(0.35); cursor: pointer; }
 .form-group textarea { resize: vertical; min-height: 90px; }
 
 .form-submit {
-  margin-top: 6px; width: 100%; padding: 17px;
-  background: var(--gold); color: var(--black);
-  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
-  font-weight: 600; font-family: var(--font-sans);
+  margin-top: 6px; 
+  width: 100%; 
+  padding: 17px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: var(--black);
+  font-size: 10px; 
+  letter-spacing: 3px; 
+  text-transform: uppercase;
+  font-weight: 600; 
+  font-family: var(--font-sans);
   transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 12px rgba(201,162,39,0.2);
 }
-.form-submit:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(201,162,39,0.28); }
+.form-submit:hover { 
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  transform: translateY(-2px); 
+  box-shadow: 0 12px 36px rgba(201,162,39,0.35);
+}
 
 .contact-right .section-tag { justify-content: flex-start; }
 .contact-right .section-tag::before { display: none; }
 .channels { display: flex; flex-direction: column; gap: 2px; margin-top: 30px; }
 .channel {
-  display: flex; align-items: center; gap: 16px; padding: 20px 22px;
-  background: var(--dark-3); border: 1px solid transparent;
-  transition: border-color 0.3s, background 0.3s; cursor: pointer;
+  display: flex; 
+  align-items: center; 
+  gap: 16px; 
+  padding: 24px 26px;
+  background: linear-gradient(135deg, var(--dark-3) 0%, rgba(27,42,63,0.5) 100%);
+  border: 1.5px solid transparent;
+  transition: border-color 0.3s, background 0.3s, transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
 }
-.channel:hover { border-color: var(--border-d); background: rgba(201,162,39,0.05); }
-.ch-icon { width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; background: var(--gold-subtle); border: 1px solid var(--border-d); flex-shrink: 0; color: var(--gold); }
+.channel:hover { 
+  border-color: var(--gold);
+  background: linear-gradient(135deg, rgba(27,42,63,0.8), rgba(27,42,63,0.6));
+  transform: translateX(4px);
+  box-shadow: 0 8px 24px rgba(201,162,39,0.15);
+}
+.ch-icon { 
+  width: 48px; 
+  height: 48px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  background: linear-gradient(135deg, rgba(201,162,39,0.15), rgba(201,162,39,0.08));
+  border: 2px solid var(--border-d); 
+  flex-shrink: 0; 
+  color: var(--gold);
+  transition: background 0.3s, border-color 0.3s, transform 0.3s;
+}
+.channel:hover .ch-icon {
+  background: linear-gradient(135deg, rgba(201,162,39,0.25), rgba(201,162,39,0.15));
+  border-color: var(--gold);
+  transform: scale(1.08);
+}
 .ch-icon svg { width: 18px; height: 18px; }
 .ch-info strong { display: block; font-size: 13px; font-weight: 500; color: var(--white); margin-bottom: 3px; }
 .ch-info span { font-size: 12px; color: var(--text-muted); }
 .ch-arrow { margin-left: auto; color: var(--text-dim); transition: color 0.3s, transform 0.3s; flex-shrink: 0; }
 .channel:hover .ch-arrow { color: var(--gold); transform: translateX(4px); }
 
-.contact-quote { margin-top: 28px; padding: 24px; border: 1px solid var(--border-d); background: var(--gold-subtle); }
+.contact-quote { 
+  margin-top: 28px; 
+  padding: 32px; 
+  border: 2px solid var(--border-d);
+  background: linear-gradient(135deg, var(--gold-subtle) 0%, rgba(201,162,39,0.06) 100%);
+  border-radius: 0;
+  box-shadow: 0 4px 16px rgba(201,162,39,0.1);
+}
 .contact-quote p { font-family: var(--font-heading); font-size: 17px; font-weight: 400; font-style: normal; color: rgba(255,255,255,0.85); line-height: 1.75; text-align: center; }
 .contact-quote cite { display: block; margin-top: 10px; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-style: normal; text-align: center; }
 
 /* =============================================
-   FOOTER
+   FOOTER — PREMIUM DARK
 ============================================= */
-footer { background: var(--black); padding: 68px 5% 36px; border-top: 1px solid var(--border-d); }
+footer { 
+  background: linear-gradient(180deg, var(--black) 0%, #050505 100%);
+  padding: 68px 5% 36px; 
+  border-top: 1px solid var(--border-d);
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.2);
+}
 .footer-top { display: flex; justify-content: space-between; gap: 56px; flex-wrap: wrap; padding-bottom: 52px; border-bottom: 1px solid var(--border-d); margin-bottom: 32px; }
 .footer-brand { max-width: 270px; }
 .footer-logo-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
@@ -801,38 +957,47 @@ footer { background: var(--black); padding: 68px 5% 36px; border-top: 1px solid 
    RESPONSIVE
 ============================================= */
 @media (max-width: 1024px) {
-  .rooms-grid { grid-template-columns: 1fr 1fr; }
   .amenities-grid { grid-template-columns: repeat(2,1fr); }
   .reviews-grid { grid-template-columns: 1fr; gap: 3px; }
   .contact-grid { grid-template-columns: 1fr; gap: 52px; }
-  .gallery-grid {
-    grid-template-columns: repeat(6,1fr);
-    grid-template-rows: 280px 220px;
-  }
-  .gi-1{grid-column:1/7;} .gi-2{grid-column:1/4;} .gi-3{grid-column:4/7;}
-  .gi-4{grid-column:1/3;} .gi-5{grid-column:3/5;} .gi-6{grid-column:5/7;}
+  #banner-premium { min-height: 480px; }
+  .banner-title { font-size: clamp(32px, 4.5vw, 48px); }
 }
 @media (max-width: 768px) {
   .nav-links, .nav-cta { display: none; }
   .nav-ham { display: flex; }
   .about-grid, .location-grid { grid-template-columns: 1fr; gap: 48px; }
   .about-badge { top: 14px; right: 14px; }
-  .rooms-grid { grid-template-columns: 1fr; }
   .amenities-grid { grid-template-columns: 1fr 1fr; }
   .exp-inner { flex-direction: column; gap: 36px; }
   .form-row { grid-template-columns: 1fr; }
   .footer-top { flex-direction: column; }
   .footer-bottom { flex-direction: column; text-align: center; }
-  .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-  .gi-1,.gi-2,.gi-3,.gi-4,.gi-5,.gi-6 { grid-column: auto; grid-row: auto; }
-  .gallery-grid .gallery-item img { aspect-ratio: 1; height: 220px; }
+  
+  .hero-title { font-size: clamp(40px, 8vw, 80px); }
+  .hero-subtitle { font-size: clamp(16px, 2.5vw, 24px); }
+  .section-title { font-size: clamp(28px, 4vw, 48px); }
+  .amenity-card { padding: 32px 20px; }
+  
+  #banner-premium { min-height: 420px; }
+  .banner-content { padding: 48px 20px; }
+  .banner-title { font-size: clamp(28px, 4vw, 42px); }
+  .banner-subtitle { font-size: clamp(14px, 2vw, 18px); margin-bottom: 28px; }
 }
 @media (max-width: 480px) {
   .amenities-grid { grid-template-columns: 1fr; }
   .hero-actions { flex-direction: column; align-items: stretch; }
-  .btn-primary, .btn-ghost { text-align: center; padding: 15px; }
-  .about-stats { gap: 18px; }
-  .exp-stats { gap: 36px; }
+  .btn-primary, .btn-ghost { text-align: center; padding: 15px; width: 100%; }
+  .about-stats { gap: 18px; flex-direction: column; }
+  .exp-stats { gap: 36px; flex-direction: column; }
+  .amenity-card { padding: 24px 16px; }
+  .hero-eyebrow { font-size: 8px; }
+  .hero-scroll { bottom: 20px; }
+  
+  #banner-premium { min-height: 380px; }
+  .banner-content { padding: 40px 16px; }
+  .banner-title { font-size: clamp(24px, 3.5vw, 36px); }
+  .banner-subtitle { font-size: clamp(13px, 1.8vw, 16px); margin-bottom: 24px; }
 }
 </style>
 </head>
@@ -863,7 +1028,6 @@ footer { background: var(--black); padding: 68px 5% 36px; border-top: 1px solid 
   <a href="#hero"       onclick="closeMob()">Inicio</a>
   <a href="#nosotros"   onclick="closeMob()">Nosotros</a>
   <a href="#servicios"  onclick="closeMob()">Servicios</a>
-  <a href="#propiedades" onclick="closeMob()">Propiedades</a>
   <a href="#contacto"   onclick="closeMob()">Contacto</a>
 </div>
 
@@ -885,7 +1049,6 @@ footer { background: var(--black); padding: 68px 5% 36px; border-top: 1px solid 
     <li><a href="#hero">Inicio</a></li>
     <li><a href="#nosotros">Nosotros</a></li>
     <li><a href="#servicios">Servicios</a></li>
-    <li><a href="#propiedades">Propiedades</a></li>
     <li><a href="#testimonios">Testimonios</a></li>
   </ul>
   <a href="https://wa.me/528189941554" target="_blank" rel="noopener" class="nav-cta">Contáctanos</a>
@@ -962,91 +1125,7 @@ footer { background: var(--black); padding: 68px 5% 36px; border-top: 1px solid 
   </div>
 </section>
 
-<!-- ============ PROPIEDADES DESTACADAS — DARK ============ -->
-<section id="propiedades" aria-labelledby="propiedades-title">
-  <div class="container" style="padding:120px 0;">
-    <div class="section-header">
-      <p class="section-tag reveal">Propiedades Destacadas</p>
-      <h2 class="section-title reveal d1" id="propiedades-title" style="color:var(--white);">Encuentra <em>tu próxima propiedad</em></h2>
-      <p class="section-lead reveal d2" style="color:var(--text-muted);">Una muestra de las oportunidades que gestionamos en el área metropolitana de Monterrey. Nuestro catálogo completo se actualiza constantemente.</p>
-    </div>
-    <div class="rooms-grid">
 
-      <!-- PLACEHOLDER: reemplazar con propiedad real cuando el cliente la entregue -->
-      <article class="room-card reveal">
-        <div class="room-card-inner">
-          <img
-            src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=900&q=80"
-            alt="Villa moderna con alberca privada, ejemplo de residencia de lujo en venta"
-            class="room-card-img"
-            loading="lazy">
-          <div class="room-overlay"></div>
-          <div class="room-pills">
-            <span class="room-pill">4 Recámaras</span>
-            <span class="room-pill">Alberca Privada</span>
-            <span class="room-pill">Doble Garage</span>
-          </div>
-          <div class="room-content">
-            <p class="room-tag">Residencial · San Pedro Garza García</p>
-            <h3 class="room-name">Villa Contemporánea<br>con Alberca</h3>
-            <p class="room-desc">Residencia de diseño contemporáneo con acabados de lujo, alberca privada y amplios espacios para vivir y recibir con estilo.</p>
-            <p class="room-price">$18,500,000 <span>MXN · Venta</span></p>
-          </div>
-        </div>
-      </article>
-
-      <!-- PLACEHOLDER: reemplazar con propiedad real cuando el cliente la entregue -->
-      <article class="room-card reveal d1">
-        <div class="room-card-inner">
-          <img
-            src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=900&q=80"
-            alt="Sala de departamento moderno amueblado, ejemplo de propiedad en renta"
-            class="room-card-img"
-            loading="lazy">
-          <div class="room-overlay"></div>
-          <div class="room-pills">
-            <span class="room-pill">2 Recámaras</span>
-            <span class="room-pill">Amueblado</span>
-            <span class="room-pill">Amenidades</span>
-          </div>
-          <div class="room-content">
-            <p class="room-tag">Departamento · Valle Oriente</p>
-            <h3 class="room-name">Depto. Ejecutivo<br>Amueblado</h3>
-            <p class="room-desc">Departamento moderno y funcional, ideal para ejecutivos o parejas, en zona de alta plusvalía con amenidades de primer nivel.</p>
-            <p class="room-price">$28,000 <span>MXN · Renta mensual</span></p>
-          </div>
-        </div>
-      </article>
-
-      <!-- PLACEHOLDER: reemplazar con propiedad real cuando el cliente la entregue -->
-      <article class="room-card reveal d2">
-        <div class="room-card-inner">
-          <img
-            src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=900&q=80"
-            alt="Casa familiar de estilo tradicional con porche y jardín amplio"
-            class="room-card-img"
-            loading="lazy">
-          <div class="room-overlay"></div>
-          <div class="room-pills">
-            <span class="room-pill">3 Recámaras</span>
-            <span class="room-pill">Jardín Amplio</span>
-            <span class="room-pill">Zona Segura</span>
-          </div>
-          <div class="room-content">
-            <p class="room-tag">Casa Familiar · Área Metropolitana MTY</p>
-            <h3 class="room-name">Casa Familiar<br>de Dos Plantas</h3>
-            <p class="room-desc">Hogar cálido y espacioso pensado para familias, en fraccionamiento con seguridad y áreas verdes para disfrutar en comunidad.</p>
-            <p class="room-price">$6,900,000 <span>MXN · Venta</span></p>
-          </div>
-        </div>
-      </article>
-
-    </div>
-    <div style="text-align:center;margin-top:48px;">
-      <a href="https://wa.me/528189941554" target="_blank" rel="noopener" class="btn-ghost reveal">Consultar Catálogo Completo</a>
-    </div>
-  </div>
-</section>
 
 <!-- ============ SERVICIOS — WHITE ============ -->
 <section id="servicios" aria-labelledby="servicios-title">
@@ -1118,53 +1197,14 @@ footer { background: var(--black); padding: 68px 5% 36px; border-top: 1px solid 
   </div>
 </section>
 
-<!-- ============ GALERÍA — DARK, fotos reales ============ -->
-<section id="galeria" aria-labelledby="galeria-title">
-  <div class="container" style="padding:120px 0;">
-    <div class="section-header">
-      <p class="section-tag reveal">Portafolio</p>
-      <h2 class="section-title reveal d1" id="galeria-title">Espacios que <em>inspiran</em></h2>
-      <p class="section-lead reveal d2" style="color:var(--text-muted);">Cada propiedad cuenta una historia distinta. Estos son algunos de los espacios que ayudamos a nuestros clientes a encontrar.</p>
-    </div>
-    <div class="gallery-grid reveal d1">
-
-      <div class="gallery-item gi-1">
-        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80"
-             alt="Villa moderna con alberca infinita y vista panorámica al atardecer" loading="lazy">
-        <div class="gi-label">Residencias de Autor</div>
-      </div>
-
-      <div class="gallery-item gi-2">
-        <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=800&q=80"
-             alt="Fachada de casa minimalista blanca con jardín y entrada de acceso" loading="lazy">
-        <div class="gi-label">Diseño Contemporáneo</div>
-      </div>
-
-      <div class="gallery-item gi-3">
-        <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=80"
-             alt="Cocina moderna de diseño con acabados blancos y barra desayunadora" loading="lazy">
-        <div class="gi-label">Cocinas de Diseño</div>
-      </div>
-
-      <div class="gallery-item gi-4">
-        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=800&q=80"
-             alt="Casa de estilo campestre iluminada al anochecer, rodeada de jardín" loading="lazy">
-        <div class="gi-label">Hogares con Carácter</div>
-      </div>
-
-      <div class="gallery-item gi-5">
-        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80"
-             alt="Villa moderna con alberca y techo de madera, ideal para vivir en familia" loading="lazy">
-        <div class="gi-label">Espacios para Vivir</div>
-      </div>
-
-      <div class="gallery-item gi-6">
-        <img src="https://images.unsplash.com/photo-1517935706615-2717063c2225?auto=format&fit=crop&w=800&q=80"
-             alt="Panorama urbano nocturno, referencia del crecimiento y plusvalía de las zonas donde operamos" loading="lazy">
-        <div class="gi-label">Desarrollo Urbano</div>
-      </div>
-
-    </div>
+<!-- ============ BANNER CON IMAGEN Y TEXTO ============ -->
+<section id="banner-premium" aria-label="Sección Premium de Propiedad">
+  <div class="banner-bg" style="background-image: url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1920&q=80');" aria-hidden="true"></div>
+  <div class="banner-overlay" aria-hidden="true"></div>
+  <div class="banner-content">
+    <h2 class="banner-title reveal">Encuentra el <em>hogar de tus sueños</em></h2>
+    <p class="banner-subtitle reveal d1">Con Valora Realty, cada propiedad es una oportunidad de construir tu patrimonio.</p>
+    <a href="https://wa.me/528189941554" target="_blank" rel="noopener" class="btn-primary reveal d2">Solicita tu Asesoría Hoy</a>
   </div>
 </section>
 
@@ -1343,7 +1383,6 @@ footer { background: var(--black); padding: 68px 5% 36px; border-top: 1px solid 
       <ul>
         <li><a href="#nosotros">Nosotros</a></li>
         <li><a href="#servicios">Servicios</a></li>
-        <li><a href="#propiedades">Propiedades</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
     </div>
